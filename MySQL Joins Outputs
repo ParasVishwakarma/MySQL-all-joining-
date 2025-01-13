@@ -1,0 +1,177 @@
+
+mysql> CREATE DATABASE CompanyDB;
+ATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    DepartmentID INT
+);
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(50)
+);
+INSERT INTO Employees (EmployeeID, Name, DepartmentID)
+VALUES
+(1, 'paras', 1),
+(2, 'kishor', 2),
+(3, 'ram', 3),
+(4, 'kumar', NULL);
+INSERT INTO Departments (DepartmentID, DepartmentName)
+VALUES
+(1, 'HR'),
+(2, 'IT'),
+(4, 'Sales');
+
+Query OK, 1 row affected (0.03 sec)
+
+mysql> USE CompanyDB;
+Database changed
+mysql> CREATE TABLE Employees (
+    ->     EmployeeID INT PRIMARY KEY,
+    ->     Name VARCHAR(50),
+    ->     DepartmentID INT
+    -> );
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> CREATE TABLE Departments (
+    ->     DepartmentID INT PRIMARY KEY,
+    ->     DepartmentName VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> INSERT INTO Employees (EmployeeID, Name, DepartmentID)
+    -> VALUES
+    -> (1, 'paras', 1),
+    -> (2, 'kishor', 2),
+    -> (3, 'ram', 3),
+    -> (4, 'kumar', NULL);
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Departments (DepartmentID, DepartmentName)
+    -> VALUES
+    -> (1, 'HR'),
+    -> (2, 'IT'),
+    -> (4, 'Sales');
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| AREA               |
+| BRANCH             |
+| CompanyDB          |
+| EmployeeDB         |
+| information_schema |
+| lib                |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+9 rows in set (0.00 sec)
+
+mysql> use CompanyDB;
+Database changed
+mysql> show tables;
++---------------------+
+| Tables_in_CompanyDB |
++---------------------+
+| Departments         |
+| Employees           |
++---------------------+
+2 rows in set (0.00 sec)
+
+mysql> select*from Departments;
++--------------+----------------+
+| DepartmentID | DepartmentName |
++--------------+----------------+
+|            1 | HR             |
+|            2 | IT             |
+|            4 | Sales          |
++--------------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from Employees;
++------------+--------+--------------+
+| EmployeeID | Name   | DepartmentID |
++------------+--------+--------------+
+|          1 | paras  |            1 |
+|          2 | kishor |            2 |
+|          3 | ram    |            3 |
+|          4 | kumar  |         NULL |
++------------+--------+--------------+
+4 rows in set (0.00 sec)
+//INNER JOIN
+
+
+mysql> SELECT Employees.EmployeeID, Employees.Name, Departments.DepartmentName
+loyees
+INNER JOIN -> FROM Employees
+    -> INNER JOIN Departments
+ Employees.Depar    -> ON Employees.DepartmentID = Departments.DepartmentID;
++------------+--------+----------------+
+| EmployeeID | Name   | DepartmentName |
++------------+--------+----------------+
+|          1 | paras  | HR             |
+|          2 | kishor | IT             |
++------------+--------+----------------+
+2 rows in set (0.00 sec)
+
+//LEFT JOIN
+mysql> SELECT Employees.EmployeeID, Employees.Name, Departments.DepartmentName
+    -> FROM Employees
+    -> LEFT JOIN Departments
+    -> ON Employees.DepartmentID = Departments.DepartmentID;
++------------+--------+----------------+
+| EmployeeID | Name   | DepartmentName |
++------------+--------+----------------+
+|          1 | paras  | HR             |
+|          2 | kishor | IT             |
+|          3 | ram    | NULL           |
+|          4 | kumar  | NULL           |
++------------+--------+----------------+
+4 rows in set (0.00 sec)
+
+//RIGHT JOIN
+mysql> SELECT Employees.EmployeeID, Employees.Name, Departments.DepartmentName
+    -> FROM Employees
+    -> RIGHT JOIN Departments
+    -> ON Employees.DepartmentID = Departments.DepartmentID;
++------------+--------+----------------+
+| EmployeeID | Name   | DepartmentName |
++------------+--------+----------------+
+|          1 | paras  | HR             |
+|          2 | kishor | IT             |
+|       NULL | NULL   | Sales          |
++------------+--------+----------------+
+3 rows in set (0.00 sec)
+
+//FULL JOIN (LEFT JOIN UNION RIGHT JOIN
+)
+
+mysql> SELECT Employees.EmployeeID, Employees.Name, Departments.DepartmentName
+    -> FROM Employees
+    -> LEFT JOIN Departments
+    -> ON Employees.DepartmentID = Departments.DepartmentID
+    ->
+    -> UNION
+
+RIGHT JOIN Departments
+ON Emplo    ->
+    -> SELECT Employees.EmployeeID, Employees.Name, Departments.DepartmentName
+    -> FROM Employees
+    -> RIGHT JOIN Departments
+    -> ON Employees.DepartmentID = Departments.DepartmentID;
++------------+--------+----------------+
+| EmployeeID | Name   | DepartmentName |
++------------+--------+----------------+
+|          1 | paras  | HR             |
+|          2 | kishor | IT             |
+|          3 | ram    | NULL           |
+|          4 | kumar  | NULL           |
+|       NULL | NULL   | Sales          |
++------------+--------+----------------+
+5 rows in set (0.12 sec)
+
