@@ -1,1 +1,1 @@
-# MySQL-all-joining-
+# MySQL-all-joinings-
