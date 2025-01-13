@@ -1,0 +1,49 @@
+CREATE DATABASE CompanyDB;
+USE CompanyDB;   
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    DepartmentID INT
+);
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(50)
+);  
+INSERT INTO Employees (EmployeeID, Name, DepartmentID)
+VALUES
+(1, 'paras', 1),
+(2, 'kishor', 2),
+(3, 'ram', 3),
+(4, 'kumar', NULL);
+INSERT INTO Departments (DepartmentID, DepartmentName)
+VALUES
+(1, 'HR'),
+(2, 'IT'),
+(4, 'Sales');
+
+
+SELECT Employees.EmployeeID, Employees.Name, Departments.DepartmentName
+FROM Employees
+INNER JOIN Departments
+ON Employees.DepartmentID = Departments.DepartmentID;
+
+
+SELECT Employees.EmployeeID, Employees.Name, Departments.DepartmentName
+FROM Employees
+LEFT JOIN Departments
+ON Employees.DepartmentID = Departments.DepartmentID; 
+
+
+SELECT Employees.EmployeeID, Employees.Name, Departments.DepartmentName
+FROM Employees
+RIGHT JOIN Departments
+ON Employees.DepartmentID = Departments.DepartmentID; 
+
+
+SELECT Employees.EmployeeID, Employees.Name, Departments.DepartmentName
+FROM Employees
+FULL JOIN Departments
+ON Employees.DepartmentID = Departments.DepartmentID;
+
+
+
