@@ -1,1 +1,1 @@
-# MySQL-all-joinings-
+# CodeTech-MySQL-all-joinings-
